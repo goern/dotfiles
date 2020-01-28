@@ -1,0 +1,27 @@
+[init]
+  templatedir = ~/.git_template
+[push]
+  default = current
+[pull]
+  rebase = true
+[color]
+  ui = auto
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+[merge]
+  ff = only
+[commit]
+	template = ~/.gitmessage
+  verbose = true
+	gpgsign = true
+[fetch]
+  prune = true
+[rebase]
+  autosquash = true
+[include]
+  path = ~/.gitconfig.local
+[diff]
+  colorMoved = zebra
