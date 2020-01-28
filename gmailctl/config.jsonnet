@@ -18,6 +18,43 @@ local label_archive(filter, label) =
    ]
 ;
 
+local fedora_mailing_list(name, label = '') =
+    local labels =
+        if label == '' then
+           [ std.join('/', std.splitLimit(name, '-', 1) ) ]
+        else
+           [ label ]
+    ;
+
+    [
+        {
+          filter: {
+            and: [
+              { list: name + '.lists.fedorahosted.com' },
+            ],
+          },
+          actions: {
+            archive: false,
+            markSpam: false,
+            labels: labels
+          }
+        },
+        {
+          filter: {
+            and: [
+              { list: name + '.lists.fedorahosted.com' },
+              { to: '-me' },
+            ],
+          },
+          actions: {
+            archive: true,
+            markSpam: false,
+            labels: labels
+          }
+        }
+    ]
+;
+
 local rh_mailing_list(name, label = '') =
     local labels =
         if label == '' then
@@ -160,51 +197,10 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        query: "list:\"atomic-devel.projectatomic.io\""
-      },
-      actions: {
-        archive: true,
-        labels: [
-          "atomic"
-        ]
-      }
-    },
-    {
-      filter: {
-        query: "list:\"cockpit-devel.lists.fedorahosted.org\""
-      },
-      actions: {
-        archive: true,
-        markSpam: false
-      }
-    },
-    {
-      filter: {
         from: "notifications@github.com"
       },
       actions: {
         markRead: true
-      }
-    },
-    {
-      filter: {
-        query: "list:\"cloud.lists.fedoraproject.org\""
-      },
-      actions: {
-        archive: true,
-        labels: [
-          "fedora-cloud"
-        ]
-      }
-    },
-    {
-      filter: {
-        query: "list:(satellite6-list.redhat.com)"
-      },
-      actions: {
-        archive: true,
-        markRead: true,
-        markSpam: false
       }
     },
     {
@@ -611,7 +607,10 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('memo-list', 'memo-list') +
   rh_mailing_list('openshift-announce', 'aos/openshift-announce') +
   rh_mailing_list('openshift-sme', 'aos/openshift-sme') + 
-  rh_mailing_list('sa-dach', 'sa-dach'),
+  rh_mailing_list('sa-dach', 'sa-dach') +
+  fedora_mailing_list('cockpit-devel') +
+  fedora_mailing_list('cloud', 'fedora/cloud') +
+  fedora_mailing_list('atomic-devel'),
   labels: [
     {
       name: "expenses/expenses:done"
