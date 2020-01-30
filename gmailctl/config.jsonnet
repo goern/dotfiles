@@ -174,19 +174,6 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        query: "list:\"openshift-sme.redhat.com\""
-      },
-      actions: {
-        archive: true,
-        markImportant: false,
-        category: "updates",
-        labels: [
-          "openshift-sme"
-        ]
-      }
-    },
-    {
-      filter: {
         query: "list:continuous-infra.redhat.com"
       },
       actions: {
@@ -403,17 +390,6 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        query: "list:aos-devel.redhat.com"
-      },
-      actions: {
-        markSpam: false,
-        labels: [
-          "aos/devel"
-        ]
-      }
-    },
-    {
-      filter: {
         query: "list:\"atomic-host-dev.redhat.com\""
       },
       actions: {
@@ -439,25 +415,6 @@ local lib = import 'gmailctl.libsonnet';
       actions: {
         archive: true,
         markSpam: false
-      }
-    },
-    {
-      filter: {
-        and: [
-          {
-            to: "-me"
-          },
-          {
-            query: "list:aos-devel.redhat.com"
-          }
-        ]
-      },
-      actions: {
-        archive: true,
-        markSpam: false,
-        labels: [
-          "aos/devel"
-        ]
       }
     },
     {
@@ -517,6 +474,7 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('memo-list', 'memo-list') +
   rh_mailing_list('openshift-announce', 'aos/openshift-announce') +
   rh_mailing_list('aos-announce', 'aos/announce') +
+  rh_mailing_list('aos-devel', 'aos/devel') +
   rh_mailing_list('openshift-sme', 'aos/openshift-sme') + 
   rh_mailing_list('sa-dach', 'sa-dach') +
   rh_mailing_list('cp-announce', 'cpaas/announce') +
