@@ -403,25 +403,6 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        and: [
-          {
-            to: "-me"
-          },
-          {
-            query: "list:aos-announce.redhat.com"
-          }
-        ]
-      },
-      actions: {
-        archive: true,
-        markSpam: false,
-        labels: [
-          "aos/announce"
-        ]
-      }
-    },
-    {
-      filter: {
         query: "list:aos-devel.redhat.com"
       },
       actions: {
@@ -433,64 +414,12 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        and: [
-          {
-            to: "-me"
-          },
-          {
-            query: "list:tech-talk-announce.redhat.com"
-          }
-        ]
-      },
-      actions: {
-        archive: true,
-        markSpam: false,
-        labels: [
-          "announce/tech-talk"
-        ]
-      }
-    },
-    {
-      filter: {
         query: "list:\"atomic-host-dev.redhat.com\""
       },
       actions: {
         archive: true,
         labels: [
           "atomic"
-        ]
-      }
-    },
-    {
-      filter: {
-        query: "list:announce-list.redhat.com"
-      },
-      actions: {
-        markSpam: false,
-        labels: [
-          "announce"
-        ]
-      }
-    },
-    {
-      filter: {
-        query: "list:tech-talk-announce.redhat.com"
-      },
-      actions: {
-        markSpam: false,
-        labels: [
-          "announce/tech-talk"
-        ]
-      }
-    },
-    {
-      filter: {
-        query: "list:aos-announce.redhat.com"
-      },
-      actions: {
-        markSpam: false,
-        labels: [
-          "aos/announce"
         ]
       }
     },
@@ -510,25 +439,6 @@ local lib = import 'gmailctl.libsonnet';
       actions: {
         archive: true,
         markSpam: false
-      }
-    },
-    {
-      filter: {
-        and: [
-          {
-            to: "-me"
-          },
-          {
-            query: "list:announce-list.redhat.com"
-          }
-        ]
-      },
-      actions: {
-        archive: true,
-        markSpam: false,
-        labels: [
-          "announce"
-        ]
       }
     },
     {
@@ -606,8 +516,10 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('managers-list', 'managers/list') +
   rh_mailing_list('memo-list', 'memo-list') +
   rh_mailing_list('openshift-announce', 'aos/openshift-announce') +
+  rh_mailing_list('aos-announce', 'aos/announce') +
   rh_mailing_list('openshift-sme', 'aos/openshift-sme') + 
   rh_mailing_list('sa-dach', 'sa-dach') +
+  rh_mailing_list('cp-announce', 'cpaas/announce') +
   fedora_mailing_list('cockpit-devel') +
   fedora_mailing_list('cloud', 'fedora/cloud') +
   fedora_mailing_list('atomic-devel'),
