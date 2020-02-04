@@ -18,7 +18,7 @@ local label_archive(filter, label) =
    ]
 ;
 
-local fedora_mailing_list(name, label = '') =
+  local fedora_mailing_list(name, label = '') =
     local labels =
         if label == '' then
            [ std.join('/', std.splitLimit(name, '-', 1) ) ]
@@ -80,6 +80,43 @@ local rh_mailing_list(name, label = '') =
           filter: {
             and: [
               { list: name + '.redhat.com' },
+              { to: '-me' },
+            ],
+          },
+          actions: {
+            archive: true,
+            markSpam: false,
+            labels: labels
+          }
+        }
+    ]
+;
+
+local tensorflow_mailing_list(name, label = '') =
+    local labels =
+        if label == '' then
+           [ std.join('/', std.splitLimit(name, '-', 1) ) ]
+        else
+           [ label ]
+    ;
+
+    [
+        {
+          filter: {
+            and: [
+              { list: name + '.tensorflow.org' },
+            ],
+          },
+          actions: {
+            archive: false,
+            markSpam: false,
+            labels: labels
+          }
+        },
+        {
+          filter: {
+            and: [
+              { list: name + '.tensorflow.org' },
               { to: '-me' },
             ],
           },
@@ -410,15 +447,6 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        query: "list:\"container-tools.redhat.com\""
-      },
-      actions: {
-        archive: true,
-        markSpam: false
-      }
-    },
-    {
-      filter: {
         query: "list:(thoth.thoth-station.getsentry.com)"
       },
       actions: {
@@ -478,9 +506,12 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('openshift-sme', 'aos/openshift-sme') + 
   rh_mailing_list('sa-dach', 'sa-dach') +
   rh_mailing_list('cp-announce', 'cpaas/announce') +
+  rh_mailing_list('container-buildsys-dev', 'container/buildsys-dev') +
+  rh_mailing_list('container-tools', 'container/tools') +
   fedora_mailing_list('cockpit-devel') +
   fedora_mailing_list('cloud', 'fedora/cloud') +
-  fedora_mailing_list('atomic-devel'),
+  fedora_mailing_list('atomic-devel') +
+  tensorflow_mailing_list('build', 'tensorflow/build'), 
   labels: [
     {
       name: "expenses/expenses:done"
