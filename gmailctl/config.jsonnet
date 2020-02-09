@@ -508,6 +508,7 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('cp-announce', 'cpaas/announce') +
   rh_mailing_list('container-buildsys-dev', 'container/buildsys-dev') +
   rh_mailing_list('container-tools', 'container/tools') +
+  rh_mailing_list('operate-first', 'mailing lists/operate-first') +
   fedora_mailing_list('cockpit-devel') +
   fedora_mailing_list('cloud', 'fedora/cloud') +
   fedora_mailing_list('atomic-devel') +
