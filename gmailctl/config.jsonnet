@@ -153,17 +153,6 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        query: "list:\"tech-list.redhat.com\""
-      },
-      actions: {
-        archive: true,
-        labels: [
-          "mailing lists/tech-list"
-        ]
-      }
-    },
-    {
-      filter: {
         from: "kundenservice@egencia.de"
       },
       actions: {
@@ -172,16 +161,6 @@ local lib = import 'gmailctl.libsonnet';
         category: "updates",
         labels: [
           "travel"
-        ]
-      }
-    },
-    {
-      filter: {
-        query: "list:openshift-commons-ml-sig.redhat.com"
-      },
-      actions: {
-        labels: [
-          "openshift-commons-ml-sig"
         ]
       }
     },
@@ -501,6 +480,7 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('managers-list', 'managers/list') +
   rh_mailing_list('memo-list', 'memo-list') +
   rh_mailing_list('openshift-announce', 'aos/openshift-announce') +
+  rh_mailing_list('openshift-commons-sig-ml', 'aos/openshift-commons-sig-ml') +
   rh_mailing_list('aos-announce', 'aos/announce') +
   rh_mailing_list('aos-devel', 'aos/devel') +
   rh_mailing_list('openshift-sme', 'aos/openshift-sme') + 
@@ -509,6 +489,7 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('container-buildsys-dev', 'container/buildsys-dev') +
   rh_mailing_list('container-tools', 'container/tools') +
   rh_mailing_list('operate-first', 'mailing lists/operate-first') +
+  rh_mailing_list('tech-list', 'mailing lists/tech-list') +
   fedora_mailing_list('cockpit-devel') +
   fedora_mailing_list('cloud', 'fedora/cloud') +
   fedora_mailing_list('atomic-devel') +
