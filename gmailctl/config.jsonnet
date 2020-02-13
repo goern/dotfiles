@@ -18,7 +18,7 @@ local label_archive(filter, label) =
    ]
 ;
 
-  local fedora_mailing_list(name, label = '') =
+local fedora_mailing_list(name, label = '') =
     local labels =
         if label == '' then
            [ std.join('/', std.splitLimit(name, '-', 1) ) ]
@@ -318,7 +318,6 @@ local lib = import 'gmailctl.libsonnet';
       },
       actions: {
         star: true,
-        markSpam: false,
         markImportant: true,
         category: "personal",
         labels: [
@@ -370,19 +369,6 @@ local lib = import 'gmailctl.libsonnet';
     },
     {
       filter: {
-        query: "list:(package-extract.thoth-station.github.com)"
-      },
-      actions: {
-        archive: true,
-        markSpam: false,
-        category: "updates",
-        labels: [
-          "thoth/thoth-zuul"
-        ]
-      }
-    },
-    {
-      filter: {
         query: "list:\"stuttgart-list.redhat.com\""
       },
       actions: {
@@ -421,7 +407,6 @@ local lib = import 'gmailctl.libsonnet';
       },
       actions: {
         archive: true,
-        markSpam: false
       }
     },
     {
@@ -430,7 +415,6 @@ local lib = import 'gmailctl.libsonnet';
       },
       actions: {
         markRead: true,
-        markImportant: false,
         category: "updates",
         labels: [
           "thoth/sentry"
@@ -443,7 +427,6 @@ local lib = import 'gmailctl.libsonnet';
       },
       actions: {
         markRead: true,
-        markSpam: false,
         category: "updates"
       }
     },
@@ -465,7 +448,6 @@ local lib = import 'gmailctl.libsonnet';
       },
       actions: {
         archive: true,
-        markSpam: false,
         category: "updates",
         labels: [
           "thoth/zuul"
@@ -490,14 +472,15 @@ local lib = import 'gmailctl.libsonnet';
   rh_mailing_list('container-tools', 'container/tools') +
   rh_mailing_list('operate-first', 'mailing lists/operate-first') +
   rh_mailing_list('tech-list', 'mailing lists/tech-list') +
+  rh_mailing_list('psi-openstack-users', 'psi/users/openstack') +
+  rh_mailing_list('psi-openshift-users', 'psi/users/openshift') +
   fedora_mailing_list('cockpit-devel') +
   fedora_mailing_list('cloud', 'fedora/cloud') +
   fedora_mailing_list('atomic-devel') +
   tensorflow_mailing_list('build', 'tensorflow/build'), 
   labels: [
-    {
-      name: "expenses/expenses:done"
-    },
+    { name: "expenses/expenses:done" },
+    { name: "summit" },
 
   ] + lib.rulesLabels(self.rules),
 }
