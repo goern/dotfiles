@@ -129,6 +129,43 @@ local tensorflow_mailing_list(name, label = '') =
     ]
 ;
 
+local google_mailing_list(name, label = '') =
+    local labels =
+        if label == '' then
+           [ std.join('/', std.splitLimit(name, '-', 1) ) ]
+        else
+           [ label ]
+    ;
+
+    [
+        {
+          filter: {
+            and: [
+              { list: name + '.googlegroups.com' },
+            ],
+          },
+          actions: {
+            archive: false,
+            markSpam: false,
+            labels: labels
+          }
+        },
+        {
+          filter: {
+            and: [
+              { list: name + '.googlegroups.com' },
+              { to: '-me' },
+            ],
+          },
+          actions: {
+            archive: true,
+            markSpam: false,
+            labels: labels
+          }
+        }
+    ]
+;
+
 local lib = import 'gmailctl.libsonnet';
 
 {
@@ -477,7 +514,8 @@ local lib = import 'gmailctl.libsonnet';
   fedora_mailing_list('cockpit-devel') +
   fedora_mailing_list('cloud', 'fedora/cloud') +
   fedora_mailing_list('atomic-devel') +
-  tensorflow_mailing_list('build', 'tensorflow/build'), 
+  tensorflow_mailing_list('build', 'tensorflow/build') + 
+  tensorflow_mailing_list('tekton-dev', 'tekton/dev'), 
   labels: [
     { name: "expenses/expenses:done" },
     { name: "summit" },
