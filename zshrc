@@ -117,4 +117,10 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+ZSH_DOTENV_PROMPT=false
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=66'
+
+if [[ -z "$XDG_CONFIG_HOME" ]]
+then
+	export XDG_CONFIG_HOME="$HOME/.config/"
+fi
