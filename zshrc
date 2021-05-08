@@ -77,6 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 #  shrink-path
 plugins=(
+  gh
   gitfast
   git
   git-auto-fetch
@@ -84,6 +85,7 @@ plugins=(
   zsh-autosuggestions
   zsh-256color
   oc
+  zsh-aliases-exa
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -124,3 +126,5 @@ if [[ -z "$XDG_CONFIG_HOME" ]]
 then
 	export XDG_CONFIG_HOME="$HOME/.config/"
 fi
+
+export EDITOR=vi
