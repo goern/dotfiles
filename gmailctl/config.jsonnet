@@ -519,6 +519,7 @@ local lib = import 'gmailctl.libsonnet';
   labels: [
     { name: "expenses/expenses:done" },
     { name: "summit" },
+    { name: "hiring" },
 
   ] + lib.rulesLabels(self.rules),
 }
