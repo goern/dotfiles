@@ -77,15 +77,18 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 #  shrink-path
 plugins=(
+  colorize 
   gh
   gitfast
   git
   git-auto-fetch
   dotenv
+  rust
+  kubectl
   zsh-autosuggestions
   zsh-256color
-  oc
   zsh-aliases-exa
+  octozen
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -128,3 +131,11 @@ then
 fi
 
 export EDITOR=vi
+export QT_QPA_PLATFORM=wayland
+export PATH=/home/goern/go/bin:/home/goern/.cargo/bin:~/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$PATH"
